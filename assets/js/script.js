@@ -3,8 +3,6 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    fetchIp();
-    fetchGeoIp();
     document.querySelector('#ButtonRefresh').addEventListener('click', refresh);
 }
 
@@ -21,7 +19,7 @@ async function fetchIp() {
 
 function displayIp(ip){
     const container = document.querySelector("#IpContainer");
-    container.innerHTML = ip.ip;
+    container.innerHTML =' IP : ' + ip.ip;
 }
 
 async function fetchGeoIp(){
@@ -40,20 +38,20 @@ async function fetchGeoIp(){
 
 function displayCity(data){
     const container = document.querySelector("#CityContainer");
-    container.innerHTML = data.city;
+    container.innerHTML =' City : ' + data.city;
 }
 function displayRegion(data){
     const container = document.querySelector("#RegionContainer");
-    container.innerHTML = data.region;
+    container.innerHTML =' Region : ' +  data.region;
 }
 function displayCountry(data){
     const container = document.querySelector("#CountryContainer");
-    container.innerHTML = data.country;
+    container.innerHTML =' Country : ' +   data.country;
 }
 
 function displayLoc(data){
     const container = document.querySelector("#LocContainer");
-    container.innerHTML = data.loc;
+    container.innerHTML =' Coordinates : ' +   data.loc;
 }
 
 function refresh() {
