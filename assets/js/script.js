@@ -60,7 +60,7 @@ async function fetchLtude(city, region){
         let data = await response.json();
         displayLatitude(data[0]);
         displayLongitude(data[0]);
-        fetchWheather(data[0].latitude, data[0].longitude);
+        fetchWheather(data[0].lat, data[0].lon);
     }
     catch(error){
         console.log("Fout bij het ophalen van de api ",error);
@@ -79,13 +79,23 @@ function displayLongitude(data){
 async function fetchWheather(latitude, longitude){
     let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,rain&forecast_days=1`);
     let data = await response.json();
-    displaytemperature(data);
-    displayWindSpeed(data);
-    displayRain(data);
+    displaytemperature(data.current);
+    displayWindSpeed(data.current);
+    displayRain(data.current);
 
 }
 
 function displaytemperature(data){
     const container = document.querySelector("#TemperatureContainer");
-    container.innerHTML = 'Temperature : ' + data.current.temperature_2m;
+    container.innerHTML = 'Temperature : ' + data.temperature_2m;
+}
+
+function displayWindSpeed(data){
+    const container = document.querySelector("#WindSpeedContainer");
+    container.innerHTML = 'Wind speed : ' + data.wind_speed_10m;
+}
+
+function displayRain(data){
+    const container = document.querySelector("#RainContainer");
+    container.innerHTML = 'Rain : ' + data.rain;
 }
